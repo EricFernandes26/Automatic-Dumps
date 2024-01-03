@@ -17,3 +17,23 @@ $password = "*"
 $databases = @("dvdrental", "db2", "db3", "db4")
 $outputDirectory = "C:\BackupsPG"
 ```
+
+# Performing Backups
+The script goes through the list of databases and creates a backup file for each of them.
+
+```powershell
+foreach ($database in $databases) {
+    # Construindo o nome do arquivo de saída
+    $outputFile = Join-Path -Path $outputDirectory -ChildPath "$database.dump"
+
+    # Caminho para o executável pg_dump.exe
+    $pgDumpCommand = "C:\Program Files\PostgreSQL\16\bin\pg_dump.exe"
+
+    # Construindo a string de comando para pg_dump
+    $pgDumpArguments = "-h $hostname -p $port -U $username -d $database -F c -b -v -f $outputFile"
+
+    # Executando o comando pg_dump
+    Start-Process -FilePath $pgDumpCommand -ArgumentList $pgDumpArguments -Wait -NoNewWindow
+}
+```
+Backup files are saved in the C:\BackupsPG directory. This process is useful to ensure the security and integrity of data stored in PostgreSQL databases.
