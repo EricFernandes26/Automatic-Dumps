@@ -2,6 +2,7 @@
 
 The powershell scripts in this repository are intended to automate the task of backing up your PostgreSQL databases.
 Note:
+
 1 - Create a folder in C: called Backups so the script will run without problems
 
 2 - Remember to access Windows PowerShell in the directory where the pg_dump and pg_restore executables are located on Windows, which is found in the path C:\Program Files\PostgreSQL\16\bin>
